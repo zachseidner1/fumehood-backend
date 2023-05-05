@@ -38,5 +38,4 @@ router.get("/", async (req, res) => {
   } catch (ignored) {
     res.status(500).json({ message: "Internal server error" })
   }
-
 })
