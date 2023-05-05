@@ -1,4 +1,4 @@
-import * as dynamo from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient, ListTablesCommand } from "@aws-sdk/client-dynamodb";
 import express from "express";
 import { config } from "./config/config";
 import { PORT } from "./config/config";
@@ -7,7 +7,7 @@ import { PORT } from "./config/config";
 const router = express();
 
 /** Connect to Dynamo */
-const client = new dynamo.DynamoDBClient(config)
+const client = new DynamoDBClient(config)
 
 
 /** Log requests */
@@ -27,7 +27,9 @@ router.listen(PORT, () => {
   console.log(`Began listening on port ${PORT}`)
 })
 
-/** Base route */
-router.get("/", (req, res) => {
-  res.json({ message: "Hello world" })
+/** Base route - lists tables of the database */
+router.get("/", async (req, res) => {
+  const lstTablesCommand = new ListTablesCommand({});
+  let response = await client.send(lstTablesCommand)
+  res.json(response.TableNames)
 })

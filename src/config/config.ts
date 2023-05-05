@@ -12,4 +12,4 @@ export const config: DynamoDBClientConfig = {
     secretAccessKey: SECRET_KEY,
   }
 }
-export const PORT = 8000
+export const PORT = process.env.PORT!
