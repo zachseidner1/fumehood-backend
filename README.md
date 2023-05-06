@@ -1,4 +1,4 @@
-# fumehood-backend-ts
+# fumehood-backend
 
 Backend service for Cornell's fumehood dashboard written in TypeScript, using Dynamo DB.
 
